@@ -12,7 +12,13 @@ if %errorlevel% neq 0 (
 echo Continue only if you have installed RED4ext for Cyberpunk 2077
 pause
 
-set /p cpPath=Insert full path to the Cyberpunk 2077 game folder:
+set /p projectName="Enter project name (playground): "
+
+if %projectName% == "" (
+    set projectName = "playground"
+)
+
+set /p cpPath="Insert full path to the Cyberpunk 2077 game folder: "
 :: Replace backslashes with forward slashes
 set "cpPathFS=%cpPath:\=/%"
 set "pluginPath=%cpPath%\red4ext\plugins\playground"
@@ -62,12 +68,13 @@ for /D %%f in (res\*) do (
    if errorlevel 1 echo Failed to create directory symlink: %%~nxf
 )
 
-echo Setting up RED4Ext plugins' CMake path variable
+echo Setting up CMake variables
 if not exist cmake (
     mkdir cmake
 )
 
 echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > cmake\UserConfig.cmake
+echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") > cmake\UserConfig.cmake
 
 echo DONE! You may close this window.
 

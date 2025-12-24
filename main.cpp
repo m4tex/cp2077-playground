@@ -1,6 +1,9 @@
-#include <RED4ext/RED4ext.hpp>
+#include <iostream>
 
-constexpr wchar_t mods_path = L"scripts";
+#include "RED4ext/RED4ext.hpp"
+#include "RedLib.hpp"
+
+constexpr wchar_t mods_path[] = L"scripts";
 
 RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::PluginHandle aHandle, RED4ext::EMainReason aReason, const RED4ext::Sdk* aSdk)
 {
@@ -9,10 +12,12 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::PluginHandle aHandle, RED4ext::
     case RED4ext::EMainReason::Load: {
         Red::TypeInfoRegistrar::RegisterDiscovered();
 
-        if (!aSdk->scripts->Add(aHandle, mods_path.c_str())) {
+        if (!aSdk->scripts->Add(aHandle, mods_path)) {
             std::cerr << "Failed to add scripts" << std::endl;
             return false;
         }
+
+        std::puts("Hello world!");
 
         break;
     }
