@@ -14,8 +14,8 @@ pause
 
 set /p projectName="Enter project name (playground): "
 
-if %projectName% == "" (
-    set projectName = "playground"
+if "%projectName%" == "" (
+    set projectName=playground
 )
 
 set /p cpPath="Insert full path to the Cyberpunk 2077 game folder: "
