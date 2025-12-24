@@ -13,11 +13,12 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::PluginHandle aHandle, RED4ext::
         Red::TypeInfoRegistrar::RegisterDiscovered();
 
         if (!aSdk->scripts->Add(aHandle, mods_path)) {
-            std::cerr << "Failed to add scripts" << std::endl;
-            return false;
+            // Uncomment when you add your first .reds script
+            // std::cout << "No scripts found or failed to add script" << std::endl;
+            // return false;
         }
 
-        std::puts("Hello world!");
+        std::cout << "Hello world!" << std::endl;
 
         break;
     }
