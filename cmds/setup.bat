@@ -8,10 +8,10 @@ if %errorlevel% neq 0 (
 )
 
 :: leave cmds/
-cd /d "%~dp0/../"
+cd /d "%~dp0\.."
 
 :: If an argument is given, skip to symlinking using the given path
-if not "%~1%=="" (
+if not "%~1=="" (
     set cpPath="%~1"
     goto Symlink
 )
