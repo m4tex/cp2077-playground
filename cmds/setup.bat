@@ -11,7 +11,7 @@ if %errorlevel% neq 0 (
 cd /d "%~dp0\.."
 
 :: If an argument is given, skip to symlinking using the given path
-if not "%~1"=="" and not "%~2"=="" (
+if not "%~1"=="" if not "%~2"=="" (
     set cpPath="%~1"
     set pluginPath="%~1\red4ext\plugins\%~2"
     goto Symlink
@@ -30,7 +30,7 @@ if "%projectName%" == "" (
 
 set /p cpPath="Insert full path to the Cyberpunk 2077 game folder: "
 
-if "%cpPath%" == "" (
+if "%cpPath%"=="" (
     echo No path specified, exiting...
     exit /b 1
 )
@@ -85,12 +85,12 @@ for /D %%f in (res\*) do (
 echo Setting up CMake variables
 if not exist cmake (
     mkdir cmake
-    echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > cmake\UserConfig.cmake
-    echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> cmake\UserConfig.cmake
+    echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > .\cmake\UserConfig.cmake
+    echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> .\cmake\UserConfig.cmake
 )
 
 echo Creating symlink.bat
-echo .\setup.bat %cpPath% %projectName% > .\cmds\symlink.bat
+echo .\setup.bat "%cpPath%" "%projectName%" > .\cmds\symlink.bat
 
 echo DONE! You may close this window.
 
