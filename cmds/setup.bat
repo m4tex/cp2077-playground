@@ -63,7 +63,7 @@ if not exist "%cpPath%/r6/scripts" (
 "C:\Windows\System32\xcopy.exe" "%~dp0\Logs.reds" "%cpPath%/r6/scripts" /Y /Q >nul
 
 :Symlink
-echo Symlinking all resources
+echo Symlinking all resources...
 
 if not exist "%pluginPath%" (
     mkdir "%pluginPath%"
@@ -83,15 +83,17 @@ for /D %%f in (res\*) do (
    if errorlevel 1 echo Failed to create directory symlink: %%~nxf
 )
 
-if not exist cmake mkdir cmake
+if not exist cmake (
+    echo Setting up CMake variables...
+    mkdir cmake
+)
 
 if exist cmake if not exist cmake/UserConfig.cmake (
-    echo Setting up CMake variables
     echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > .\cmake\UserConfig.cmake
     echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> .\cmake\UserConfig.cmake
 )
 
-echo Creating symlink.bat
+echo Creating symlink.bat...
 echo "%%~dp0setup.bat" "%cpPath%" "%projectName%" > .\cmds\symlink.bat
 
 echo DONE! You may close this window.
