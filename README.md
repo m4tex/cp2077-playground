@@ -1,5 +1,5 @@
 # cp2077-playground
-Base project with RED4ext and RedLib in CMake. Comes with a batch script for automatic setup. Has a folder for redscript 
+Base RED4ext plugin with RedLib in CMake. Comes with a batch script for automatic setup. Has a folder for redscript 
 files which get compiled.
 ## Setup
 ```
@@ -15,3 +15,20 @@ Finally, you can put `.reds` files into `res/scripts` and they will be compiled 
 
 Build the library using the MSVC toolchain. For running tests, you can add these program arguments to the game 
 executable `--skip-launcher -modded -skipStartScreen -noWatermark`
+
+## Game files
+### RED4ext config
+In `red4ext/config.ini` you can adjust some settings to your liking. I use `[logging] level = "off"` to minimize clutter
+and `wait_for_debugger = true`
+
+### Required mods
+```
+- redscript
+- RED4ext
+```
+### Recommended mods
+```
+- Codeware (more high level tools in redscript)
+- Cyber Engine Tweaks (game logs, lua support)
+- RedHotTools (redscript hot reload) 
+```
