@@ -3,7 +3,7 @@ Base RED4ext plugin with RedLib in CMake. Comes with a batch script for automati
 files which get compiled.
 ## Setup
 ```
-git clone https://github.com/m4tex/cp2077-playground
+git clone https://github.com/m4tex/cp2077-playground project_name
 ```
 Run `cmds/setup.bat` as administrator.
 If in doubt, feel free to see why admin privileges are required in the batch script (for creating symlinks).
