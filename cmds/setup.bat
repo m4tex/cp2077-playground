@@ -11,8 +11,9 @@ if %errorlevel% neq 0 (
 cd /d "%~dp0\.."
 
 :: If an argument is given, skip to symlinking using the given path
-if not "%~1=="" (
+if not "%~1=="" and not "%~2"=="" (
     set cpPath="%~1"
+    set pluginPath="%~1\red4ext\plugins\%~2"
     goto Symlink
 )
 
@@ -89,7 +90,7 @@ if not exist cmake (
 )
 
 echo Creating symlink.bat
-echo .\setup.bat %cpPath% > .\cmds\symlink.bat
+echo .\setup.bat %cpPath% %projectName% > .\cmds\symlink.bat
 
 echo DONE! You may close this window.
 
