@@ -1,4 +1,5 @@
 @echo off
+
 :: Check if running as admin
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -8,11 +9,12 @@ if %errorlevel% neq 0 (
 )
 
 :: leave cmds/
-cd /d "%~dp0\.."
+cd /d "%~dp0\..\"
 
 :: If an argument is given, skip to symlinking using the given path
 if not "%~1"=="" if not "%~2"=="" (
     set cpPath="%~1"
+    set cpPathFS="%cpPath:\=/%"
     set pluginPath="%~1\red4ext\plugins\%~2"
     goto Symlink
 )
@@ -83,8 +85,9 @@ for /D %%f in (res\*) do (
 )
 
 echo Setting up CMake variables
-if not exist cmake (
-    mkdir cmake
+if not exist cmake mkdir cmake
+
+if exist cmake if not exist cmake/UserConfig.cmake (
     echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > .\cmake\UserConfig.cmake
     echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> .\cmake\UserConfig.cmake
 )
