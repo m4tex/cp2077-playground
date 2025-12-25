@@ -11,7 +11,7 @@ if %errorlevel% neq 0 (
 cd /d "%~dp0\.."
 
 :: If an argument is given, skip to symlinking using the given path
-if not "%~1=="" and not "%~2"=="" (
+if not "%~1"=="" and not "%~2"=="" (
     set cpPath="%~1"
     set pluginPath="%~1\red4ext\plugins\%~2"
     goto Symlink
