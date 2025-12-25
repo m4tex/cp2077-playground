@@ -7,6 +7,15 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+:: leave cmds/
+cd /d "%~dp0/../"
+
+:: If an argument is given, skip to symlinking using the given path
+if not "%~1%=="" (
+    set cpPath="%~1"
+    goto Symlink
+)
+
 :: Auto setup of project files and dependencies, note: Currently you need to install required game mods yourself
 
 echo Continue only if you have installed RED4ext for Cyberpunk 2077
@@ -28,9 +37,6 @@ if "%cpPath%" == "" (
 :: Replace backslashes with forward slashes
 set "cpPathFS=%cpPath:\=/%"
 set "pluginPath=%cpPath%\red4ext\plugins\playground"
-
-:: leave cmds/
-cd /d "%~dp0/../"
 
 echo Cloning submodules...
 git submodule update --init --recursive
@@ -54,6 +60,7 @@ if not exist "%cpPath%/r6/scripts" (
 
 "C:\Windows\System32\xcopy.exe" "%~dp0\Logs.reds" "%cpPath%/r6/scripts" /Y /Q >nul
 
+:Symlink
 echo Symlinking all resources
 
 if not exist "%pluginPath%" (
@@ -77,10 +84,12 @@ for /D %%f in (res\*) do (
 echo Setting up CMake variables
 if not exist cmake (
     mkdir cmake
+    echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > cmake\UserConfig.cmake
+    echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> cmake\UserConfig.cmake
 )
 
-echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > cmake\UserConfig.cmake
-echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> cmake\UserConfig.cmake
+echo Creating symlink.bat
+echo .\setup.bat %cpPath% > .\cmds\symlink.bat
 
 echo DONE! You may close this window.
 
