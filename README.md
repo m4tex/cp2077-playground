@@ -5,7 +5,7 @@ files which get compiled.
 In admin privileged command prompt, run
 ```
 git clone https://github.com/m4tex/cp2077-playground &&
-./cp2077-playground/cmds/setup.bat
+.\cp2077-playground\cmds\setup.bat
 ```
 If in doubt, feel free to see why admin privileges are required in the batch script (for creating symlinks).
 

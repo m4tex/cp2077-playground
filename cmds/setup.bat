@@ -19,6 +19,12 @@ if "%projectName%" == "" (
 )
 
 set /p cpPath="Insert full path to the Cyberpunk 2077 game folder: "
+
+if "%cpPath%" == "" (
+    echo No path specified, exiting...
+    exit /b 1
+)
+
 :: Replace backslashes with forward slashes
 set "cpPathFS=%cpPath:\=/%"
 set "pluginPath=%cpPath%\red4ext\plugins\playground"
