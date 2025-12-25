@@ -20,7 +20,7 @@ add_subdirectory(deps/RedLib)
 
 add_library(${CMAKE_PROJECT_NAME}
         SHARED
-            main.cpp
+            src/main.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}

@@ -2,11 +2,10 @@
 Base project with RED4ext and RedLib in CMake. Comes with a batch script for automatic setup. Has a folder for redscript 
 files which get compiled.
 ## Setup
-In admin privileged command prompt, run
 ```
 git clone https://github.com/m4tex/cp2077-playground
-.\cp2077-playground\cmds\setup.bat
 ```
+Run `cmds/setup.bat` as administrator.
 If in doubt, feel free to see why admin privileges are required in the batch script (for creating symlinks).
 
 All files and directories in `res/` will be symlinked to the plugin directory when you first run setup.bat. You can run
