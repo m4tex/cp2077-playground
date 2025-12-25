@@ -93,8 +93,8 @@ if not exist cmake (
 )
 
 if exist cmake if not exist cmake/UserConfig.cmake (
-    echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder") > .\cmake\UserConfig.cmake
-    echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder") >> .\cmake\UserConfig.cmake
+    echo set(PLUGINS_DIR "%cpPathFS%/red4ext/plugins" CACHE PATH "Path to RED4Ext plugins folder"^) > .\cmake\UserConfig.cmake
+    echo set(CFG_PROJECT_NAME "%projectName%" CACHE PATH "Path to RED4Ext plugins folder"^) >> .\cmake\UserConfig.cmake
 )
 
 echo Creating symlink.bat...
