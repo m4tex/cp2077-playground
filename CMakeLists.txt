@@ -34,7 +34,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         RedLib
 )
 
-set_target_properties(${CMAKE_PROJECT_NAME}
-        PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY "${PLUGINS_DIR}/${CMAKE_PROJECT_NAME}"
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:${CMAKE_PROJECT_NAME}>"
+        "${PLUGINS_DIR}/${CMAKE_PROJECT_NAME}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>"
 )
