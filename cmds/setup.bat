@@ -15,6 +15,7 @@ cd /d "%~dp0\.."
 if not "%~1"=="" if not "%~2"=="" (
     set cpPath="%~1"
     set "pluginPath=%~1\red4ext\plugins\%~2"
+    set symlink=1
     goto Symlink
 )
 
@@ -82,6 +83,9 @@ for /D %%f in (res\*) do (
    mklink /D "%pluginPath%\%%~nxf" "%%~ff"
    if errorlevel 1 echo Failed to create directory symlink: %%~nxf
 )
+
+:: Skip everything else if we are just symlinking
+if defined symlink goto :EOF
 
 if not exist cmake (
     echo Setting up CMake variables...
